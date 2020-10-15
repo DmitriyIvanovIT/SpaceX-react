@@ -2,14 +2,14 @@ import React from 'react';
 import logo from '../../logo.svg';
 import './footer.css'
 
-const Footer = ({ links }) => (
+const Footer = ({ elon_twitter, twitter, flickr, website  }) => (
     <footer className="footer">
 		<img src={logo} alt="logo Space X" className="logo"/>
 		<nav className="footer-nav">
 			<ul className="list">
 				<li className="item">
 					<a 
-						href={links ? links.elon_twitter : null} 
+						href={elon_twitter} 
 						rel="noopener noreferrer" 
 						target='_blank' 
 						className="item-link"
@@ -19,7 +19,7 @@ const Footer = ({ links }) => (
 				</li>
 				<li className="item">
 					<a 
-						href={links ? links.twitter : null} 
+						href={twitter} 
 						rel="noopener noreferrer" 
 						target='_blank' 
 						className="item-link"
@@ -29,7 +29,7 @@ const Footer = ({ links }) => (
 				</li>
 				<li className="item">
 					<a 
-						href={links ? links.flickr : null} 
+						href={flickr} 
 						rel="noopener noreferrer" 
 						target='_blank' 
 						className="item-link"
@@ -39,7 +39,7 @@ const Footer = ({ links }) => (
 				</li>
 				<li className="item">
 					<a 
-						href={links ? links.website : null} 
+						href={website} 
 						rel="noopener noreferrer" 
 						target='_blank' 
 						className="item-link"

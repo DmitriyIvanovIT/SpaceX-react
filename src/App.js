@@ -1,23 +1,26 @@
 import React from 'react';
+import { BrowserRouter, Route } from 'react-router-dom';
 import Header from './Components/Header/Header';
 import Main from './Components/Main/Main';
 import Features from './Components/Features/Features';
 import Footer from './Components/Footer/Footer';
-// import Calendar from './Components/Calendar/Calendar';
-// import Details from './Components/Details/Details';
+import Home from './Components/Home/Home';
+import Calendar from './Components/Calendar/Calendar';
+import Details from './Components/Details/Details';
 import FetchData from './service/FetchData';
 
 import './css/style.css';
 
+
 class App extends React.Component {
 
-  fetchData = new FetchData;
+  fetchData = new FetchData();
 
   state = {
     rocket: 'Falcon 1',
     rocketFeatures: null,
     rockets: [],
-    links: null
+    company: null
   }
 
   componentDidMount() {
@@ -43,17 +46,31 @@ class App extends React.Component {
 
   updateCompany() {
     this.fetchData.getCompany()
-      .then(data => this.setState({ links: data.links }));
+      .then(data => this.setState({ company: data }));
   }
 
   render() {
     return (
-      <>
+      <BrowserRouter>
         <Header rockets={this.state.rockets} changeRocket={this.changeRocket}/>
-        <Main rocket={this.state.rocket}/>
-        <Features rocketFeatures={this.state.rocketFeatures}/>
-        <Footer links={this.state.links}/>
-      </>
+        <Route exact path='/SpaceX-react/'>
+          {this.state.company && <Home {...this.state}/>}
+        </Route>
+        <Route path="/SpaceX-react/rocket">
+          <Main rocket={this.state.rocket}/>
+          {this.state.rocketFeatures && <Features {...this.state.rocketFeatures}/>}
+        </Route>
+        <Route path="/SpaceX-react/calendar">
+          <Calendar/>
+        </Route>
+        <Route path="/SpaceX-react/details">
+          <Details/>
+        </Route>
+        
+        
+        
+        {this.state.company && <Footer {...this.state.company.links}/>}
+      </BrowserRouter>
     );
   }
 }

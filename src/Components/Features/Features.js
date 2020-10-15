@@ -9,10 +9,10 @@ const images = {
 	other: 'starship'
 }
 
-const Features = ({ rocketFeatures }) => (
+const Features = ({ name, height, diameter, mass, payload_weights, description }) => (
     <section className="features">
 		<h2 className="features-title">
-			{rocketFeatures ? rocketFeatures.name : null} 
+			{name} 
 			<br/>
 			Overview
 		</h2>
@@ -26,50 +26,47 @@ const Features = ({ rocketFeatures }) => (
 					<tr>
 						<td className="table-column">HEIGHT</td>
 						<td className="table-column">
-							{rocketFeatures ? 
-								`${rocketFeatures.height.meters} m / ${rocketFeatures.height.feet} ft`: null}
+							{`${height.meters} m / ${height.feet} ft`}
 						</td>
 					</tr>
 					<tr>
 						<td className="table-column">DIAMETER</td>
 						<td className="table-column">
-							{rocketFeatures ? 
-								`${rocketFeatures.diameter.meters} m / ${rocketFeatures.diameter.feet} ft`: null}
+							{`${diameter.meters} m / ${diameter.feet} ft`}
 						</td>
 					</tr>
 					<tr>
 						<td className="table-column">MASS</td>
 						<td className="table-column">
-							{rocketFeatures ? 
-								`${rocketFeatures.mass.kg} kg / ${rocketFeatures.mass.lb} lb`: null}
+							{`${mass.kg} kg / ${mass.lb} lb`}
 						</td>
 					</tr>
-					<tr>
-						<td className="table-column">PAYLOAD TO LEO</td>
-						<td className="table-column">
-							{rocketFeatures ? 
-								`${rocketFeatures.payload_weights[0].kg} kg / ${rocketFeatures.payload_weights[0].lb} lb`: null}
-						</td>
-					</tr>
+					
+					{payload_weights.map((item, i) => (
+						<tr key={i}>
+							<td className="table-column">PAYLOAD TO {item.id.toUpperCase()}</td>
+							<td className="table-column">
+								{`${ item.kg} kg / ${ item.lb} lb`}
+							</td>
+						</tr>
+					))}
 				</thead>
 			</table>
 			
-			{rocketFeatures ? 
 				<RelaxWrapper speed={10}>
 					<img
-						src={`./img/${images.hasOwnProperty(rocketFeatures.name) ?
-							images[rocketFeatures.name] :
+						src={`./img/${images.hasOwnProperty(name) ?
+							images[name] :
 							images.other}.png`}
 						alt="rocket"
 						className="rocket"
 					/>
 				</RelaxWrapper> 
-			: null}
 			
 			<article>
 				<h3 className="features-subtitle">DESCRIPTION</h3>
 				<p className="features-text">
-					{rocketFeatures ? rocketFeatures.description : null}
+					{description}
 				</p>
 			</article>
 		</div>
