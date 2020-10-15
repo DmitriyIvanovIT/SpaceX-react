@@ -12,7 +12,7 @@ const images = {
 const Features = ({ rocketFeatures }) => (
     <section className="features">
 		<h2 className="features-title">
-			Falcon 1 
+			{rocketFeatures ? rocketFeatures.name : null} 
 			<br/>
 			Overview
 		</h2>
@@ -25,37 +25,51 @@ const Features = ({ rocketFeatures }) => (
 				<thead>
 					<tr>
 						<td className="table-column">HEIGHT</td>
-						<td className="table-column">22.25 m / 73 ft</td>
+						<td className="table-column">
+							{rocketFeatures ? 
+								`${rocketFeatures.height.meters} m / ${rocketFeatures.height.feet} ft`: null}
+						</td>
 					</tr>
 					<tr>
 						<td className="table-column">DIAMETER</td>
-						<td className="table-column">1.68 m / 5.5 ft</td>
+						<td className="table-column">
+							{rocketFeatures ? 
+								`${rocketFeatures.diameter.meters} m / ${rocketFeatures.diameter.feet} ft`: null}
+						</td>
 					</tr>
 					<tr>
 						<td className="table-column">MASS</td>
-						<td className="table-column">30,146 kg / 66,460 lb</td>
+						<td className="table-column">
+							{rocketFeatures ? 
+								`${rocketFeatures.mass.kg} kg / ${rocketFeatures.mass.lb} lb`: null}
+						</td>
 					</tr>
 					<tr>
 						<td className="table-column">PAYLOAD TO LEO</td>
-						<td className="table-column">450 kg / 992 lb</td>
+						<td className="table-column">
+							{rocketFeatures ? 
+								`${rocketFeatures.payload_weights[0].kg} kg / ${rocketFeatures.payload_weights[0].lb} lb`: null}
+						</td>
 					</tr>
 				</thead>
 			</table>
 			
-			<RelaxWrapper speed={10}>
-				<img
+			{rocketFeatures ? 
+				<RelaxWrapper speed={10}>
+					<img
 						src={`./img/${images.hasOwnProperty(rocketFeatures.name) ?
 							images[rocketFeatures.name] :
 							images.other}.png`}
 						alt="rocket"
 						className="rocket"
-				/>
-			</RelaxWrapper>
+					/>
+				</RelaxWrapper> 
+			: null}
 			
 			<article>
 				<h3 className="features-subtitle">DESCRIPTION</h3>
 				<p className="features-text">
-					The Falcon 1 was an expendable launch system privately developed and manufactured by SpaceX during 2006-2009. On 28 September 2008, Falcon 1 became the first privately-developed liquid-fuel launch vehicle to go into orbit around the Earth.
+					{rocketFeatures ? rocketFeatures.description : null}
 				</p>
 			</article>
 		</div>

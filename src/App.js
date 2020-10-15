@@ -40,6 +40,7 @@ class App extends React.Component {
   }
 
   render(){
+    console.log(this.state.rocketFeatures);
     return (
       <>
         <Header rockets={this.state.rockets} changeRocket={this.changeRocket}/>
