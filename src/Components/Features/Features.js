@@ -1,46 +1,60 @@
 import React from 'react';
-import falcon_1 from '../../img/falcon-1.png';
+import RelaxWrapper from 'react-rellax-wrapper';
 import './features.css';
 
-const Features = () => (
-    <section class="features">
-		<h2 class="features-title">
-			Falcon 1 <br/>Overview
-		</h2>
-		<div class="overview">
+const images = {
+	'Falcon 1': 'falcon-1',
+	'Falcon 9': 'falcon-9',
+	'Falcon Heavy': 'falcon-heavy',
+	other: 'starship'
+}
 
-			<table class="table">
-				<caption class="table-title">
+const Features = ({ rocketFeatures }) => (
+    <section className="features">
+		<h2 className="features-title">
+			Falcon 1 
+			<br/>
+			Overview
+		</h2>
+		<div className="overview">
+
+			<table className="table">
+				<caption className="table-title">
 					Size
 				</caption>
 				<thead>
 					<tr>
-						<td class="table-column">HEIGHT</td>
-						<td class="table-column">22.25 m / 73 ft</td>
+						<td className="table-column">HEIGHT</td>
+						<td className="table-column">22.25 m / 73 ft</td>
 					</tr>
 					<tr>
-						<td class="table-column">DIAMETER</td>
-						<td class="table-column">1.68 m / 5.5 ft</td>
+						<td className="table-column">DIAMETER</td>
+						<td className="table-column">1.68 m / 5.5 ft</td>
 					</tr>
 					<tr>
-						<td class="table-column">MASS</td>
-						<td class="table-column">30,146 kg / 66,460 lb</td>
+						<td className="table-column">MASS</td>
+						<td className="table-column">30,146 kg / 66,460 lb</td>
 					</tr>
 					<tr>
-						<td class="table-column">PAYLOAD TO LEO</td>
-						<td class="table-column">450 kg / 992 lb</td>
+						<td className="table-column">PAYLOAD TO LEO</td>
+						<td className="table-column">450 kg / 992 lb</td>
 					</tr>
 				</thead>
 			</table>
-			<img
-					src={falcon_1}
-					alt="rocket"
-					class="rocket"
-					data-rellax-speed="14"
-			/>
+			
+			<RelaxWrapper speed={10}>
+				<img
+						src={`./img/${images.hasOwnProperty(rocketFeatures.name) ?
+							images[rocketFeatures.name] :
+							images.other}.png`}
+						alt="rocket"
+						className="rocket"
+				/>
+			</RelaxWrapper>
+			
 			<article>
-				<h3 class="features-subtitle">DESCRIPTION</h3>
-				<p class="features-text">
+				<h3 className="features-subtitle">DESCRIPTION</h3>
+				<p className="features-text">
 					The Falcon 1 was an expendable launch system privately developed and manufactured by SpaceX during 2006-2009. On 28 September 2008, Falcon 1 became the first privately-developed liquid-fuel launch vehicle to go into orbit around the Earth.
 				</p>
 			</article>
