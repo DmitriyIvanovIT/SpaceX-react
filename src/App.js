@@ -3,8 +3,8 @@ import Header from './Components/Header/Header';
 import Main from './Components/Main/Main';
 import Features from './Components/Features/Features';
 import Footer from './Components/Footer/Footer';
-import Calendar from './Components/Calendar/Calendar';
-import Details from './Components/Details/Details';
+// import Calendar from './Components/Calendar/Calendar';
+// import Details from './Components/Details/Details';
 import FetchData from './service/FetchData';
 
 import './css/style.css';
@@ -17,10 +17,12 @@ class App extends React.Component {
     rocket: 'Falcon 1',
     rocketFeatures: null,
     rockets: [],
+    links: null
   }
 
   componentDidMount() {
     this.updateRocket();
+    this.updateCompany();
   }
 
   updateRocket() {
@@ -39,14 +41,18 @@ class App extends React.Component {
     }, this.updateRocket);
   }
 
-  render(){
-    console.log(this.state.rocketFeatures);
+  updateCompany() {
+    this.fetchData.getCompany()
+      .then(data => this.setState({ links: data.links }));
+  }
+
+  render() {
     return (
       <>
         <Header rockets={this.state.rockets} changeRocket={this.changeRocket}/>
         <Main rocket={this.state.rocket}/>
         <Features rocketFeatures={this.state.rocketFeatures}/>
-        <Footer/>
+        <Footer links={this.state.links}/>
       </>
     );
   }
