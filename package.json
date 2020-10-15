@@ -10,7 +10,10 @@
     "react-dom": "^16.14.0",
     "react-scripts": "3.4.3"
   },
+  "homepage": "https://dmitriyivanovit.github.io/SpaceX-react/",
   "scripts": {
+    "predeploy": "npm rum build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
