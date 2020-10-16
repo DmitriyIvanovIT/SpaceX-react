@@ -49,25 +49,31 @@ class App extends React.Component {
       .then(data => this.setState({ company: data }));
   }
 
+  updateCard = id =>  {
+    this.setState({cardId: id});
+  }
+
   render() {
     return (
       <BrowserRouter>
         <Header rockets={this.state.rockets} changeRocket={this.changeRocket}/>
+        
         <Route exact path='/SpaceX-react/'>
           {this.state.company && <Home {...this.state}/>}
         </Route>
+        
         <Route path="/SpaceX-react/rocket">
           <Main rocket={this.state.rocket}/>
           {this.state.rocketFeatures && <Features {...this.state.rocketFeatures}/>}
         </Route>
+        
         <Route path="/SpaceX-react/calendar">
-          <Calendar/>
+          <Calendar updateCard={this.updateCard}/>
         </Route>
+        
         <Route path="/SpaceX-react/details">
-          <Details/>
+          {this.state.cardId && <Details {...this.state}/>}
         </Route>
-        
-        
         
         {this.state.company && <Footer {...this.state.company.links}/>}
       </BrowserRouter>

@@ -5,7 +5,7 @@ import FetchData from '../../service/FetchData';
 
 import './calendar.css';
 
-const Calendar = () => {
+const Calendar = (props) => {
 
 	const fetchData = new FetchData();
 
@@ -15,8 +15,6 @@ const Calendar = () => {
 		fetchData.getLaunches()
 			.then(data => setData(data));
 	}, []);
-
-	console.log(data);
 	
 	return (
 		<>
@@ -34,7 +32,11 @@ const Calendar = () => {
 									<h2 className="launches-title">
 										{item.name}
 									</h2>
-									<Link to="/SpaceX-react/details" className="button launches-details">
+									<Link 
+										to="/SpaceX-react/details" 
+										className="button launches-details"
+										onClick={() => props.updateCard(item.id)}
+									>
 										Подробнее
 									</Link>
 								</div>
